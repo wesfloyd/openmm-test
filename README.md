@@ -3,6 +3,22 @@
 Example workload to validate [OpenMM](https://github.com/openmm/openmm) on [Bacalhau](bacalhau.org) via [workload onboarding](https://docs.bacalhau.org/getting-started/workload-onboarding)  
 
 
+To create the Docker Image
+
+```bash
+
+docker run -it alpine
+
+
+# install OpenMM via Conda http://docs.openmm.org/latest/userguide/application/01_getting_started.html#installing-openmm 
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O ~/miniconda.sh
+bash ~/miniconda.sh -b -p $HOME/miniconda
+conda install -y -c conda-forge openmm
+python -m openmm.testInstallation
+
+
+```
+
 To test locally:
 1) Clone the repository
 2) Invoke the docker container:
