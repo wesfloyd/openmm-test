@@ -34,11 +34,19 @@ docker commit <CONTAINER_ID> wesfloyd/bacalwow-openmm-test
 
 ```
 
-To test the docker image locally
+temp utilities
 ```
+docker run -d -t -v output:/project/output \
+	wesfloyd/bacalwow-openmm-test
+docker exec -it NAME bash
+docker build -t wesfloyd/bacalwow-openmm-test-v2 .
+```
+
+To test the docker image locally
+```bash
 docker run -v output:/project/output \
-	wesfloyd/bacalwow-openmm-test \
-	python /home/openmm-test/run_openmm_simulation.py 
+	-w /home/openmm-test
+	wesfloyd/bacalwow-openmm-test-v2
 
 docker push wesfloyd/bacalwow-openmm-test
 
@@ -47,7 +55,7 @@ docker push wesfloyd/bacalwow-openmm-test
 
 
 To run on [Bacalhau](https://github.com/filecoin-project/bacalhau):
-```
+```bash
 bacalhau docker run \
 	-o output:/project/output \
 	wesfloyd/bacalwow-socat-test
