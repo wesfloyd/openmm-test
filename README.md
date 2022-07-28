@@ -10,7 +10,7 @@ To create the Docker Image
 docker run --name bacalwow-openmm-test -it python:slim bash
 apt-get update && apt-get -y upgrade \
     && apt-get install -y \
-    g++ wget sudo coreutils gnupg vim
+    g++ wget sudo coreutils gnupg vim git python
 mkdir /project /project/output/
 
 # install Conda and OpenMM http://docs.openmm.org/latest/userguide/application/01_getting_started.html#installing-openmm 
@@ -22,31 +22,28 @@ conda install -y -c conda-forge openmm
 python -m openmm.testInstallation
 
 #clone the openmm test repo
+git clone https://github.com/wesfloyd/openmm-test.git
+cd openmm-test/
+
+
 
 ...
 
 exit
 docker commit <CONTAINER_ID> wesfloyd/bacalwow-openmm-test
 
-#test
-docker run wesfloyd/bacalwow-openmm-test python <somedir> run_openmm_simulation.py
+```
+
+To test the docker image locally
+```
+docker run -v output:/project/output \
+	wesfloyd/bacalwow-openmm-test \
+	python /home/openmm-test/run_openmm_simulation.py 
 
 docker push wesfloyd/bacalwow-openmm-test
 
-
-
-
-
 ```
 
-To test locally:
-1) Clone the repository
-2) Invoke the docker container:
-```
-docker run \
-	-v output:/project/output \
-	wesfloyd/bacalwow-socat-test
-```
 
 
 To run on [Bacalhau](https://github.com/filecoin-project/bacalhau):
