@@ -29,7 +29,7 @@ barostatInterval = 25
 
 # Simulation Options
 
-steps = 10000
+steps = 20
 equilibrationSteps = 0
 #platform = Platform.getPlatformByName('CUDA')
 platform = Platform.getPlatformByName('CPU')
@@ -75,3 +75,4 @@ simulation.step(steps)
 state = simulation.context.getState(getPositions=True, enforcePeriodicBox=system.usesPeriodicBoundaryConditions())
 with open("final_state.pdbx", mode="w") as file:
     PDBxFile.writeFile(simulation.topology, state.getPositions(), file)
+print('Simulation complete, file written to disk as ... final_state.pdbx')
