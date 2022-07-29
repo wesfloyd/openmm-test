@@ -11,6 +11,7 @@ Example workload to validate [OpenMM](https://github.com/openmm/openmm) on [Baca
 ### To run on [Bacalhau](https://github.com/filecoin-project/bacalhau):
 ```bash
 bacalhau docker run \
+	-v bafybeig63whfqyuvwqqrp5456fl4anceju24ttyycexef3k5eurg5uvrq4:/project/input
 	-o output:/project/output \
 	wesfloyd/bacalwow-socat-test
 
@@ -25,14 +26,13 @@ bacalhau get [JOB_ID]
 ### To test the docker image locally
 ```bash
 
-git clone https://github.com/wesfloyd/openmm-test.git
+#git clone https://github.com/wesfloyd/openmm-test.git
 
-docker run -v input:/project/input\
+docker run \
 	-v output:/project/output \
 	-w /home/openmm-test
 	wesfloyd/bacalwow-openmm-test-v2
 
-docker push wesfloyd/bacalwow-openmm-test
 
 ```
 
@@ -40,37 +40,31 @@ docker push wesfloyd/bacalwow-openmm-test
 
 
 
+### To create the Docker image from Dockerfile
+
+docker build -t wesfloyd/bacalwow-openmm .
+
+docker push wesfloyd/bacalwow-openmm
 
 
-
-
-
-
-
-
-
-
-
-
-
-### To create the Docker Image using Conda image
+### To create the Docker Image from scratch
 
 ```bash
 
-docker run --name bacalwow-openmm-test -it conda/miniconda3
+docker run --name bacalwow-openmm -it conda/miniconda3
 
 conda install -y -c conda-forge openmm
 #python -m openmm.testInstallation
 
 
 #this section will be omitted from Dockerfile
-mkdir /project /project/output/
+mkdir /project /project/output/ /project/input
 cd /project
 apt-get update && apt-get -y upgrade
 apt-get install -y wget sudo vim git
 git clone https://github.com/wesfloyd/openmm-test.git
 cp openmm-test/run_openmm_simulation.py  .
-cp openmm-test/input/2dri-processed.pdb .
+cp openmm-test/input/2dri-processed.pdb ./input
 python run_openmm_simulation.py
 
 exit

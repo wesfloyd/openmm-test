@@ -1,25 +1,10 @@
-FROM wesfloyd/bacalwow-openmm-test
+FROM conda/miniconda3
 
-WORKDIR /home/openmm-test
-
-CMD ["/root/miniconda/bin/python","/home/openmm-test/run_openmm_simulation.py"]
-
-
-
-
-FROM ...
-
-RUN apt-get update && apt-get -y upgrade \
-    && apt-get install -y --no-install-recommends \
-    g++ \
-    && rm -rf /var/lib/apt/lists/*
+RUN conda install -y -c conda-forge openmm
 
 WORKDIR /project
 
 COPY ./run_openmm_simulation.py /project
-COPY ./2dri-processed.pdb /project
+COPY ./2dri-processed.pdb /project/input
 
-
-RUN pip3 install -r requirements.txt
-
-CMD ["python","main.py"]
+CMD ["python","run_openmm_simulation.py"]
