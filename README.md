@@ -11,7 +11,6 @@ Example workload to validate [OpenMM](https://github.com/openmm/openmm) on [Baca
 ### To run on [Bacalhau](https://github.com/filecoin-project/bacalhau):
 ```bash
 bacalhau docker run \
-	-v bafybeig63whfqyuvwqqrp5456fl4anceju24ttyycexef3k5eurg5uvrq4:/project/input
 	-o output:/project/output \
 	wesfloyd/bacalwow-socat-test
 
@@ -23,10 +22,12 @@ bacalhau get [JOB_ID]
 ```
 
 
-### To test the docker image locally
+### To Build and test the docker image locally
 ```bash
 
-#git clone https://github.com/wesfloyd/openmm-test.git
+git clone https://github.com/wesfloyd/openmm-test.git
+
+docker build -t wesfloyd/bacalwow-openmm .
 
 mkdir output
 
@@ -34,15 +35,8 @@ docker run \
 	-v output:/project/output \
 	wesfloyd/bacalwow-openmm
 
-
-```
-
-
-### To create the Docker image from Dockerfile
-```bash
-docker build -t wesfloyd/bacalwow-openmm .
-
 docker push wesfloyd/bacalwow-openmm
+
 
 ```
 
