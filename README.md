@@ -12,7 +12,7 @@ Example workload to validate [OpenMM](https://github.com/openmm/openmm) on [Baca
 ```bash
 bacalhau docker run \
 	-o output:/project/output \
-	wesfloyd/bacalwow-socat-test
+	wesfloyd/bacalwow-openmm
 
 bacalhau list
 
