@@ -6,7 +6,7 @@ from openmm.unit import *
 
 # Input Files
 
-pdb = PDBFile('2dri-processed.pdb')
+pdb = PDBFile('input/2dri-processed.pdb')
 forcefield = ForceField('amber14-all.xml', 'amber14/tip3pfb.xml')
 
 # System Configuration
@@ -73,6 +73,6 @@ simulation.step(steps)
 # Write file with final simulation state
 
 state = simulation.context.getState(getPositions=True, enforcePeriodicBox=system.usesPeriodicBoundaryConditions())
-with open("final_state.pdbx", mode="w") as file:
+with open("output/final_state.pdbx", mode="w") as file:
     PDBxFile.writeFile(simulation.topology, state.getPositions(), file)
-print('Simulation complete, file written to disk as ... final_state.pdbx')
+print('Simulation complete, file written to disk as ... output/ final_state.pdbx')
