@@ -24,7 +24,11 @@ bacalhau get [JOB_ID]
 
 ### To test the docker image locally
 ```bash
-docker run -v output:/project/output \
+
+git clone https://github.com/wesfloyd/openmm-test.git
+
+docker run -v input:/project/input\
+	-v output:/project/output \
 	-w /home/openmm-test
 	wesfloyd/bacalwow-openmm-test-v2
 
@@ -55,27 +59,23 @@ docker push wesfloyd/bacalwow-openmm-test
 
 docker run --name bacalwow-openmm-test -it conda/miniconda3
 
-apt-get update && apt-get -y upgrade
-apt-get install -y \
-    wget sudo gnupg vim git
 conda install -y -c conda-forge openmm
-python -m openmm.testInstallation
+#python -m openmm.testInstallation
 
+
+#this section will be omitted from Dockerfile
 mkdir /project /project/output/
 cd /project
+apt-get update && apt-get -y upgrade
+apt-get install -y wget sudo vim git
 git clone https://github.com/wesfloyd/openmm-test.git
 cp openmm-test/run_openmm_simulation.py  .
-cp openmm-test/2dri-processed.pdb .
-
-
-
-python -m openmm.testInstallation
-
-
-...
+cp openmm-test/input/2dri-processed.pdb .
+python run_openmm_simulation.py
 
 exit
 docker commit <CONTAINER_ID> wesfloyd/bacalwow-openmm-test
+docker push wesfloyd/bacalwow-openmm-test
 
 ```
 

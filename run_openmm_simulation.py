@@ -29,7 +29,7 @@ barostatInterval = 25
 
 # Simulation Options
 
-steps = 20
+steps = 10
 equilibrationSteps = 0
 #platform = Platform.getPlatformByName('CUDA')
 platform = Platform.getPlatformByName('CPU')
