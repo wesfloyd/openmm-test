@@ -6,7 +6,7 @@ from openmm.unit import *
 
 # Input Files
 
-pdb = PDBFile('input/2dri-processed.pdb')
+pdb = PDBFile('2dri-processed.pdb')
 forcefield = ForceField('amber14-all.xml', 'amber14/tip3pfb.xml')
 
 # System Configuration

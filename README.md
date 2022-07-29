@@ -28,6 +28,8 @@ bacalhau get [JOB_ID]
 
 #git clone https://github.com/wesfloyd/openmm-test.git
 
+mkdir output
+
 docker run \
 	-v output:/project/output \
 	wesfloyd/bacalwow-openmm
@@ -36,15 +38,13 @@ docker run \
 ```
 
 
-
-
-
 ### To create the Docker image from Dockerfile
-
+```bash
 docker build -t wesfloyd/bacalwow-openmm .
 
 docker push wesfloyd/bacalwow-openmm
 
+```
 
 ### To create the Docker Image from scratch
 
@@ -67,8 +67,8 @@ cp openmm-test/input/2dri-processed.pdb ./input
 python run_openmm_simulation.py
 
 #exit
-#docker commit <CONTAINER_ID> wesfloyd/bacalwow-openmm-test
-#docker push wesfloyd/bacalwow-openmm-test
+#docker commit <CONTAINER_ID> wesfloyd/bacalwow-openmm
+#docker push wesfloyd/bacalwow-openmm
 
 ```
 
